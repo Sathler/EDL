@@ -4,7 +4,13 @@ Inicialmente PHP se referia a "Personal Home Page Tools", um conjunto de scripts
 
 Com o aumento da demanda por aplicações web simples e dinâmicas e com o apoio de usuários na correção de bugs o PHP se expandiu, chegando a estar presente em centenas de milhões de domínios atualmente.
 
-A linguagem PHP foi desenvolvida propositalmente para ser parecida com a linguagem C, tornando fácil a adoção de desenvolvedores habituados com C e outras linguagens similares, foi influenciada também pelas linguagens Perl e Java. 
+A linguagem PHP foi desenvolvida propositalmente para ser parecida com a linguagem C, tornando fácil a adoção de desenvolvedores habituados com C e outras linguagens similares, foi influenciada também pelas linguagens Perl e Java e possui sintaxe HTML embutida. 
+
+## Classificação
+
+PHP é um linguagem interpretada, imperativa, funcional, orientada a objeto, procedural e de tipagem fraca e dinâmica.
+
+Apesar de possuir aplicações em outras áreas, a liguagem PHP é utilizada principalmente em desenvolvimento *server-side* web, sendo executado junto à um servidor web. 
 
 ## Bibliografia
 
