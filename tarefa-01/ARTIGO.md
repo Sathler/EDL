@@ -2,9 +2,9 @@
 
 Inicialmente PHP se referia a "Personal Home Page Tools", um conjunto de scripts CGI escritos em linguagem C desenvolvidos por Rasmus Lerdof em 1994 com o propósito de acompanhar visitas em seu currículo online. Em 1995, Rasmus liberou seu código fonte ao público.
 
-Com o aumento da demanda por aplicações web simples e dinâmicas e com o apoio de usuários na correção de bugs o PHP se expandiu, chegando a estar presente em centenas de milhões de domínios atualmente.
+Com o aumento da demanda por aplicações web simples e dinâmicas e com o apoio de usuários na correção de bugs o PHP se expandiu, estando presente em centenas de milhões de domínios atualmente.
 
-A linguagem PHP foi desenvolvida propositalmente para ser parecida com a linguagem C, tornando fácil a adoção de desenvolvedores habituados com C e outras linguagens similares, foi influenciada também pelas linguagens Perl e Java e possui sintaxe HTML embutida. 
+A linguagem PHP foi desenvolvida propositalmente para ser parecida com a linguagem C, tornando fácil a adoção de desenvolvedores habituados com essa linguagem e outras similares, foi influenciada também pelas linguagens Perl e Java e possui sintaxe HTML embutida. 
 
 ## Classificação
 
@@ -12,6 +12,61 @@ PHP é um linguagem interpretada, imperativa, funcional, orientada a objeto, pro
 
 Apesar de possuir aplicações em outras áreas, a liguagem PHP é utilizada principalmente em desenvolvimento *server-side* web, sendo executado junto à um servidor web. 
 
-## Bibliografia
+## Comparação com outras linguagens
+
+Uma importante funcionalidade da liguagem PHP se chama reflexão, que é a capacidade do programa de observar e modificar sua própria estrutura e comportamento em tempo de execução. Tal ação é impossível em outras linguagens orientadas a objeto sem suporte a reflexão, como por exemplo, C++;
+
+Uma opção possível para linguagens com suporte a programação reflexiva é acessar campos que a princípio não seriam acessíveis ao programador, como por exemplo:
+
+```c++
+class Pessoa{
+	private:
+	int RG;
+	string nome;
+
+	public:
+	Pessoa(int rg, string nome){
+		this->RG = rg;
+		this->nome = nome;	
+	}
+};
+
+int main(){
+	Pessoa Usuario(123456789, "Bruce Wayne");
+	cout << Usuario.nome << ' ' << Usuario.RG << endl;
+}
+```
+O programa acima retornará um erro em tempo de compilação, já que os campos "nome" e "rg" são inacessíveis fora da objeto em que estão definidos, sendo necessário a inclusão de métodos de classe para realizar tal ação.
+
+```c++
+class Pessoa{
+	private:
+	int RG;
+	string nome;
+
+	public:
+	Pessoa(int rg, string nome){
+		this->RG = rg;
+		this->nome = nome;	
+	}
+
+	string getNome(){
+		return this->nome;	
+	}
+
+	int getRG(){
+		return this->RG;
+	}
+};
+
+int main(){
+	Pessoa Usuario(123456789, "Bruce Wayne");
+	cout << Usuario.getNome() << ' ' << Usuario.getRG() << endl;
+}
+```
+
+
+## Referências
 
 [PHP.net](https://www.php.net/manual/pt_BR/history.php.php)
+[en.wikipedia.org/wiki/Reflection_(computer_programming)](https://en.wikipedia.org/wiki/Reflection_(computer_programming))
