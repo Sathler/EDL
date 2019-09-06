@@ -36,7 +36,7 @@ int main(){
 	cout << Usuario.nome << ' ' << Usuario.RG << endl;
 }
 ```
-O programa acima retornará um erro em tempo de compilação, já que os campos "nome" e "rg" são inacessíveis fora da objeto em que estão definidos, sendo necessário a inclusão de métodos de classe para realizar tal ação.
+O programa acima retornará um erro em tempo de compilação, já que os campos "nome" e "rg" são inacessíveis fora da classe em que estão definidos, sendo necessário a inclusão de métodos de classe para realizar tal ação.
 
 ```c++
 class Pessoa{
@@ -64,7 +64,41 @@ int main(){
 	cout << Usuario.getNome() << ' ' << Usuario.getRG() << endl;
 }
 ```
+Através da programação reflexiva presente no PHP é possível acessar tais campos sem a necessidade de tais métodos, isso é especialmente vantajoso quando o programador não possui acesso à implementação de tais classes.
 
+```PHP
+<?php
+
+class Pessoa{
+	private $RG;
+	private $nome;
+	
+	function __construct($rg, $nome){
+		$this->RG = $rg;
+		$this->nome = $nome;
+	}
+}
+
+//o objeto reflectionClass armazena informações sobre a classe Pessoa 
+$reflectionClass = new ReflectionClass("Pessoa");
+
+//criando uma nova instancia de Pessoa a partir de reflectionClass
+$usuario = $reflectionClass->newInstance(123456789, "Bruce Wayne");
+
+//o metodo getProperty retorna não o valor, mas informações sobre campo da classe refletida em reflection class
+$fieldNome = $reflectionClass->getProperty("nome");
+$fieldRG = $reflectionClass->getProperty("RG");
+
+//mudando a permissao de acesso aos campos escolhidos
+$fieldNome->setAccessible(true);
+$fieldRG->setAccessible(true);
+
+//acessando valores antes inacessiveis
+echo $fieldNome->getValue($usuario).' '.$fieldRG->getValue($usuario);
+?>
+```
+
+Deve-se observar que mesmo após a mudança de acessibilidade esses campos apenas são acessiveis através da classe de reflexão e seus métodos, não sendo possível obte-los de maneira direta.
 
 ## Referências
 
