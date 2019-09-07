@@ -94,13 +94,60 @@ $fieldNome->setAccessible(true);
 $fieldRG->setAccessible(true);
 
 //acessando valores antes inacessiveis
-echo $fieldNome->getValue($usuario).' '.$fieldRG->getValue($usuario);
+echo $fieldNome->getValue($usuario).' '.$fieldRG->getValue($usuario);//Bruce Wayne 123456789
 ?>
 ```
 
 Deve-se observar que mesmo após a mudança de acessibilidade esses campos apenas são acessiveis através da classe de reflexão e seus métodos, não sendo possível obte-los de maneira direta.
 
+É também possível modificar o valor destes campos.
+
+```PHP
+//mudando o valor do campo 
+$fieldNome->setValue($usuario, "Clark Kent");
+
+echo $fieldNome->getValue($usuario).' '.$fieldRG->getValue($usuario);//Clark Kent 123456789
+```
+Tambem é possível acessar métodos antes inacessíveis
+
+```PHP
+class Pessoa{
+	private $RG;
+	private $nome;
+	
+	function __construct($rg, $nome){
+		$this->RG = $rg;
+		$this->nome = $nome;
+	}
+	
+	private function whoHeIs(){
+		$herois = ["clark kent" => "Super Man", "Bruce Wayne" => "Batman", "Diana Prince" => "Mulher-Maravilha"];
+		if(isset($herois[$this->nome])){
+			return $herois[$this->nome];
+		}
+		else{
+			return "Pessoa comum";
+		}
+	}
+}
+
+//o objeto reflectionClass armazena informações sobre a classe Pessoa 
+$reflectionClass = new ReflectionClass("Pessoa");
+
+//criando uma nova instancia de Pessoa a partir de reflectionClass
+$usuario = $reflectionClass->newInstance(123456789, "Bruce Wayne");
+
+//method recebe um objeto reflectionMethod
+$method = $reflectionClass->getMethod("whoHeIs");
+
+//mudando acesso ao metodo
+$method->setAccessible(true);
+
+//chamando o metodo para o objeto antes instanciado
+echo $method->invoke($usuario); //Batman 
+```
+
 ## Referências
 
-[PHP.net](https://www.php.net/manual/pt_BR/history.php.php)
+[PHP.net](https://www.php.net/manual/pt_BR/history.php.php)\
 [en.wikipedia.org/wiki/Reflection_(computer_programming)](https://en.wikipedia.org/wiki/Reflection_(computer_programming))
