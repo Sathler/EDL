@@ -30,7 +30,7 @@ A implementação de tal estrutura é complicada, mas pode ser encontrada nas re
 
 ## Programação Reflexiva
 
-Uma importante funcionalidade da liguagem PHP se chama reflexão, que é a capacidade do programa de observar e modificar sua própria estrutura e comportamento em tempo de execução. Tal ação é impossível em outras linguagens orientadas a objeto sem suporte a reflexão, como por exemplo, C++;
+Uma importante funcionalidade da liguagem PHP se chama reflexão, que é a capacidade do programa de observar e modificar sua própria estrutura e comportamento em tempo de execução. Tal ação é impossível em outras linguagens orientadas a objeto sem suporte a reflexão, como por exemplo, C++, já que tais informações se perdem após a compilação do programa;
 
 Uma opção possível para linguagens com suporte a programação reflexiva é acessar campos que a princípio não seriam acessíveis ao programador, como por exemplo:
 
@@ -124,7 +124,7 @@ $fieldNome->setValue($usuario, "Clark Kent");
 
 echo $fieldNome->getValue($usuario).' '.$fieldRG->getValue($usuario);//Clark Kent 123456789
 ```
-Tambem é possível acessar métodos antes inacessíveis, sem a necessidade .
+Tambem é possível acessar métodos antes inacessíveis.
 
 ```PHP
 class Pessoa{
