@@ -169,28 +169,25 @@ Em PHP traits são pedaços de código que definem propriedades e métodos que p
 
 Recomenda-se o uso de traits em PHP quando um conjunto de classes sem relação hierarquica possuem um conjunto comum de campos e métodos, já que o PHP não suporta herança multipla.
 
-C++
-```C++
-class Passaro : public Animal{
-    public:
-    void Voar(){
-        cout << "Passaro levantou voo" << endl;
+Java
+```Java
+class Passaro extends Animal{
+    public void Voar(){
+        System.out.println(this.getClass().getSimpleName()+" levantou voo.");
     }
-};
+}
 
-class Aviao : public Veiculo{
-    public:
-    void Voar(){
-        cout << "Aviao levantou voo" << endl;
+class Aviao extends Veiculo{
+    public void Voar(){
+        System.out.println(this.getClass().getSimpleName()+" levantou voo.");
     }
-};
+}
 
-class Pipa : Public Brinquedo{
-	public:
-	void Voar(){
-		cout << "Pipa levantou voo" << endl;
-	}
-};
+class Pipa extends Brinquedo{
+    public void Voar(){
+        System.out.println(this.getClass().getSimpleName()+" levantou voo.");
+    }
+}
 ```
 
 PHP
