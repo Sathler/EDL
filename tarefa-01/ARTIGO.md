@@ -10,7 +10,23 @@ A linguagem PHP foi desenvolvida propositalmente para ser parecida com a linguag
 
 PHP é um linguagem interpretada, imperativa, funcional, orientada a objeto, procedural e de tipagem fraca e dinâmica.
 
-Apesar de possuir aplicações em outras áreas, a liguagem PHP é utilizada principalmente em desenvolvimento *server-side* web, sendo executado junto à um servidor web. 
+Apesar de possuir aplicações em outras áreas, a liguagem PHP é utilizada principalmente em desenvolvimento *server-side* web, sendo executado junto à um servidor web.
+
+## Array em PHP
+
+Array em PHP funciona como uma mapa que relaciona chaves e valores, onde as chaves podem ser tanto valores inteiros quanto strings, e os valores podem ser de qualquer tipo suportado em PHP, desde valores inteiros e strings até outros arrays e objetos.
+
+Internamente um array em PHP funciona como uma hashtable com encadeamento exterior
+```PHP
+$array = [ 27,                   
+		   1.8,                  
+		   "chave" => "valor",   
+		   9 => [1,2,3,"quatro"]
+		 ];
+
+```
+
+A implementação de tal estrutura é complicada, mas pode ser encontrada nas referências.
 
 ## Comparação com outras linguagens
 
@@ -108,7 +124,7 @@ $fieldNome->setValue($usuario, "Clark Kent");
 
 echo $fieldNome->getValue($usuario).' '.$fieldRG->getValue($usuario);//Clark Kent 123456789
 ```
-Tambem é possível acessar métodos antes inacessíveis
+Tambem é possível acessar métodos antes inacessíveis.
 
 ```PHP
 class Pessoa{
@@ -121,7 +137,7 @@ class Pessoa{
 	}
 	
 	private function whoHeIs(){
-		$herois = ["clark kent" => "Super Man", "Bruce Wayne" => "Batman", "Diana Prince" => "Mulher-Maravilha"];
+		$herois = ["Clark Kent" => "Super Man", "Bruce Wayne" => "Batman", "Diana Prince" => "Mulher-Maravilha"];
 		if(isset($herois[$this->nome])){
 			return $herois[$this->nome];
 		}
@@ -150,4 +166,5 @@ echo $method->invoke($usuario); //Batman
 ## Referências
 
 [PHP.net](https://www.php.net/manual/pt_BR/history.php.php)\
-[en.wikipedia.org/wiki/Reflection_(computer_programming)](https://en.wikipedia.org/wiki/Reflection_(computer_programming))
+[en.wikipedia.org/wiki/Reflection_(computer_programming)](https://en.wikipedia.org/wiki/Reflection_(computer_programming))\
+[Nikic](https://nikic.github.io/2012/03/28/Understanding-PHPs-internal-array-implementation.html)
