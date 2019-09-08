@@ -14,21 +14,21 @@ Apesar de possuir aplicações em outras áreas, a liguagem PHP é utilizada pri
 
 ## Array em PHP
 
-Array em PHP funciona como uma mapa que relaciona chaves e valores, onde as chaves podem ser tanto valores inteiros quanto strings, e os valores podem ser de qualquer tipo suportado em PHP, desde valores inteiros e strings até outros arrays e objetos.
+Array em PHP funciona como um mapa que relaciona chaves e valores, onde as chaves podem ser tanto valores inteiros quanto strings, e os valores podem ser de qualquer tipo suportado em PHP, desde valores inteiros e strings até outros arrays e objetos.
 
 Internamente um array em PHP funciona como uma hashtable com encadeamento exterior
 ```PHP
-$array = [ 27,                   
-		   1.8,                  
-		   "chave" => "valor",   
-		   9 => [1,2,3,"quatro"]
-		 ];
+$array = [27,                   
+1.8,                  
+"chave" => "valor",   
+9 => [1,2,3,"quatro"]
+];
 
 ```
 
 A implementação de tal estrutura é complicada, mas pode ser encontrada nas referências.
 
-## Comparação com outras linguagens
+## Programação Reflexiva
 
 Uma importante funcionalidade da liguagem PHP se chama reflexão, que é a capacidade do programa de observar e modificar sua própria estrutura e comportamento em tempo de execução. Tal ação é impossível em outras linguagens orientadas a objeto sem suporte a reflexão, como por exemplo, C++;
 
@@ -80,7 +80,7 @@ int main(){
 	cout << Usuario.getNome() << ' ' << Usuario.getRG() << endl;
 }
 ```
-Através da programação reflexiva presente no PHP é possível acessar tais campos sem a necessidade de tais métodos, isso é especialmente vantajoso quando o programador não possui acesso à implementação de tais classes.
+Através da programação reflexiva presente no PHP é possível acessar estes campos sem a necessidade da criação destes métodos, isso é especialmente vantajoso quando o programador não possui acesso à implementação de tais classes.
 
 ```PHP
 <?php
@@ -124,7 +124,7 @@ $fieldNome->setValue($usuario, "Clark Kent");
 
 echo $fieldNome->getValue($usuario).' '.$fieldRG->getValue($usuario);//Clark Kent 123456789
 ```
-Tambem é possível acessar métodos antes inacessíveis.
+Tambem é possível acessar métodos antes inacessíveis, sem a necessidade .
 
 ```PHP
 class Pessoa{
@@ -163,8 +163,60 @@ $method->setAccessible(true);
 echo $method->invoke($usuario); //Batman 
 ```
 
+## Traits
+
+Em PHP traits são pedaços de código que definem propriedades e métodos que podem ser utilizados por diferentes classes.
+
+Recomenda-se o uso de traits em PHP quando um conjunto de classes sem relação hierarquica possuem um conjunto comum de campos e métodos, já que o PHP não suporta herança multipla.
+
+C++
+```C++
+class Passaro : public Animal{
+    public:
+    void Voar(){
+        cout << "Passaro levantou voo" << endl;
+    }
+};
+
+class Aviao : public Veiculo{
+    public:
+    void Voar(){
+        cout << "Aviao levantou voo" << endl;
+    }
+};
+
+class Pipa : Public Brinquedo{
+	public:
+	void Voar(){
+		cout << "Pipa levantou voo" << endl;
+	}
+};
+```
+
+PHP
+```PHP
+trait Voo{
+	public function Voar(){
+		echo get_class($this)." levantou voo<br>";
+	}
+}
+
+class Passaro extends Animal{
+	use Voo;
+}
+
+class Aviao extends Veiculo{
+	use Voo;
+}
+
+class Pipa extends Brinquedo{
+	use Voo;
+}
+```
+
 ## Referências
 
 [PHP.net](https://www.php.net/manual/pt_BR/history.php.php)\
-[en.wikipedia.org/wiki/Reflection_(computer_programming)](https://en.wikipedia.org/wiki/Reflection_(computer_programming))\
-[Nikic](https://nikic.github.io/2012/03/28/Understanding-PHPs-internal-array-implementation.html)
+[Jonathan M. Sobel Daniel P. Friedman, An Introduction to Reflection-Oriented Programming](https://web.archive.org/web/20100204091328/http://www.cs.indiana.edu/~jsobel/rop.html)\
+[Nikic](https://nikic.github.io/2012/03/28/Understanding-PHPs-internal-array-implementation.html)\
+[Especializati Blog](https://blog.especializati.com.br/traits-no-php/)
