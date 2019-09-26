@@ -48,10 +48,12 @@ insere :: Ord a => Arvore a -> a -> Arvore a
 insere Folha y = (Galho y Folha Folha)
 insere (Galho x a1 a2) y = if y>x then (Galho x a1 (insere a2 y)) else (Galho x (insere a1 y) a2)
 
+--funcao map para uma arvore binaria
 mapA :: (a -> b) -> Arvore a -> Arvore b
 mapA f Folha = Folha
 mapA f (Galho x a1 a2) = (Galho (f x)(mapA f a1)(mapA f a2))
 
+--funcao que converte um inteiro em uma string representando cada um de seus digitos
 converteParaString :: Int -> [Char]
 converteParaString x = case x of
   0 -> "zero"
@@ -68,6 +70,7 @@ converteParaString x = case x of
 
 --main = print (mapA converteParaString a5)
 
+--funcao que verifica se dado inteiro eh primo
 eh_primo :: Int -> Bool
 eh_primo n = if (fatores n) == [1,n] then True else False
   where f x = ((mod n x) == 0)
@@ -76,9 +79,34 @@ eh_primo n = if (fatores n) == [1,n] then True else False
 
 --main = print (mapA eh_primo a6)
 
+--funcao que cria uma arvore binaria cheia da altura de um dado inteiro
 addArvore :: Int -> Arvore Int
 addArvore x = criaArvore x
-  where criaArvore x = if (x == 1) then (Galho 1 Folha Folha) else Galho 1 (criaArvore (x-1)) (criaArvore (x-1))
+  where criaArvore x = if (x == 1) then (Folha) else Galho 1 (criaArvore (x-1)) (criaArvore (x-1))
 
-main = print (mapA addArvore a7)
+--main = print (mapA addArvore a7)
 
+foldA :: (a -> b -> b) -> b -> Arvore a -> b
+foldA f acc Folha = acc
+foldA f acc (Galho x Folha Folha) = (f x acc)
+foldA f acc (Galho x a1 a2) = (f x (foldA f (foldA f acc a2) a1))
+
+--soma o valor de todos os galhos de uma arvore inteira
+somaInt :: Int -> Int -> Int
+somaInt a b = a+b
+
+--main = print (foldA somaInt 0 a5)
+
+-- concatenar todos as strings de uma arvore de strings
+concatenaArvore :: String -> String -> String
+concatenaArvore s1 "" = s1
+concatenaArvore "" s1 = s1
+concatenaArvore s1 s2 = s1 ++ " " ++ s2
+
+--main = print (foldA concatenaArvore "" a4)
+
+-- constroi uma lista a partir de uma arvore
+construirLista :: Ord a => a -> [a] -> [a]
+construirLista x list = x : list
+
+main = print (foldA construirArray [] a6)
